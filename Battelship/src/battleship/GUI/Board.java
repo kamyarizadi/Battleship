@@ -78,15 +78,17 @@ public class Board {
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(98, Short.MAX_VALUE)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 918, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 592, Short.MAX_VALUE)
-					.addContainerGap())
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(164))
 		);
 		groupLayout.setHonorsVisibility(false);
 		frame.getContentPane().setLayout(groupLayout);
@@ -132,16 +134,28 @@ public class Board {
 		//System.out.println("$"+Paths.get(".").toAbsolutePath().normalize().toString());
 		//lblBoard.setIcon(new ImageIcon(Board.class.getResource("/resources/board.jpg")));
 		setBoardScaledImage(lblBoard);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		layeredPane.setLayer(lblNewLabel, 1);
 		GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
 		gl_layeredPane.setHorizontalGroup(
 			gl_layeredPane.createParallelGroup(Alignment.LEADING)
-				.addComponent(lblBoard)
+				.addGroup(gl_layeredPane.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
+					.addGap(774))
+				.addGroup(gl_layeredPane.createSequentialGroup()
+					.addComponent(lblBoard)
+					.addContainerGap(128, Short.MAX_VALUE))
 		);
 		gl_layeredPane.setVerticalGroup(
 			gl_layeredPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_layeredPane.createSequentialGroup()
-					.addGap(37)
-					.addComponent(lblBoard))
+				.addGroup(Alignment.TRAILING, gl_layeredPane.createSequentialGroup()
+					.addComponent(lblBoard)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+					.addGap(297))
 		);
 		layeredPane.setLayout(gl_layeredPane);
 		panel.setLayout(gl_panel);

@@ -46,7 +46,7 @@ public class TestFrame extends JFrame {
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		JLabel lblNewLabel = new JLabel("TTTTT");
 		layeredPane.setLayer(lblNewLabel, 0);
 		lblNewLabel.setForeground(Color.PINK);
 		lblNewLabel.setBackground(Color.YELLOW);
@@ -71,36 +71,35 @@ public class TestFrame extends JFrame {
 					.addContainerGap(167, Short.MAX_VALUE))
 		);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		JLabel lblNewLabel_1 = new JLabel("XXXXXXXXXXX");
 		layeredPane.setLayer(lblNewLabel_1, 1);
 		GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
 		gl_layeredPane.setHorizontalGroup(
 			gl_layeredPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_layeredPane.createSequentialGroup()
-					.addGap(23)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-					.addGap(38)
-					.addComponent(btnNewButton)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1)
+					.addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_layeredPane.createSequentialGroup()
+							.addGap(145)
+							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+							.addGap(240)
+							.addComponent(btnNewButton)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnNewButton_1))
+						.addGroup(gl_layeredPane.createSequentialGroup()
+							.addGap(91)
+							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(268, Short.MAX_VALUE))
 		);
 		gl_layeredPane.setVerticalGroup(
 			gl_layeredPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_layeredPane.createSequentialGroup()
-					.addGroup(gl_layeredPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_layeredPane.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_layeredPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnNewButton)
-								.addComponent(btnNewButton_1)))
-						.addGroup(gl_layeredPane.createSequentialGroup()
-							.addGap(26)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(51, Short.MAX_VALUE))
+					.addContainerGap()
+					.addGroup(gl_layeredPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton)
+						.addComponent(btnNewButton_1))
+					.addPreferredGap(ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
 		);
 		layeredPane.setLayout(gl_layeredPane);
 		contentPane.setLayout(gl_contentPane);
