@@ -29,6 +29,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLayeredPane;
 
 public class Board {
 
@@ -37,6 +38,7 @@ public class Board {
 	private final JPanel panel = new JPanel();
 	private JTextField textField;
 	private JLabel lblBoard;
+	private JLayeredPane layeredPane;
 
 	/**
 	 * Launch the board in singleton Mode.
@@ -69,17 +71,10 @@ public class Board {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 932, 754);
+		frame.setBounds(100, 100, 784, 759);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		lblBoard = new JLabel("");
-		lblBoard.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBoard.setVerticalAlignment(SwingConstants.TOP);
 		panel.setBackground(Color.BLACK);
 		panel.setBorder(new LineBorder(Color.RED, 4));
-		//System.out.println("$"+Paths.get(".").toAbsolutePath().normalize().toString());
-		//lblBoard.setIcon(new ImageIcon(Board.class.getResource("/resources/board.jpg")));
-		setBoardScaledImage(lblBoard);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -105,30 +100,50 @@ public class Board {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		layeredPane = new JLayeredPane();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(393)
+							.addGap(307)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(6)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton))
-						.addComponent(lblBoard, Alignment.TRAILING))
-					.addContainerGap(56, Short.MAX_VALUE))
+						.addComponent(layeredPane, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 771, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addComponent(lblBoard)
-					.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(1)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnNewButton)))
+					.addComponent(layeredPane, GroupLayout.PREFERRED_SIZE, 649, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton))
+					.addContainerGap())
 		);
+		
+		lblBoard = new JLabel("");
+		lblBoard.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBoard.setVerticalAlignment(SwingConstants.TOP);
+		//System.out.println("$"+Paths.get(".").toAbsolutePath().normalize().toString());
+		//lblBoard.setIcon(new ImageIcon(Board.class.getResource("/resources/board.jpg")));
+		setBoardScaledImage(lblBoard);
+		GroupLayout gl_layeredPane = new GroupLayout(layeredPane);
+		gl_layeredPane.setHorizontalGroup(
+			gl_layeredPane.createParallelGroup(Alignment.LEADING)
+				.addComponent(lblBoard)
+		);
+		gl_layeredPane.setVerticalGroup(
+			gl_layeredPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_layeredPane.createSequentialGroup()
+					.addGap(37)
+					.addComponent(lblBoard))
+		);
+		layeredPane.setLayout(gl_layeredPane);
 		panel.setLayout(gl_panel);
 	}
 	
