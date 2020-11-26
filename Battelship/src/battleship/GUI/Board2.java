@@ -14,15 +14,19 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Board2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
+	private JLayeredPane layeredPane;
 
 	/**
 	 * Launch the application.
@@ -53,7 +57,7 @@ public class Board2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		contentPane.setBackground(Color.BLACK);
-		JLayeredPane layeredPane = new JLayeredPane();
+		layeredPane = new JLayeredPane();
 		layeredPane.setBorder(new LineBorder(Color.RED, 3));
 		layeredPane.setBackground(Color.BLACK);
 		contentPane.add(layeredPane);
@@ -64,18 +68,29 @@ public class Board2 extends JFrame {
 		textField.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Fire!");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				showMiss();
+			}
+		});
 		btnNewButton.setBounds(401, 633, 55, 23);
 		layeredPane.add(btnNewButton);
 		
-		JLabel lblBoard = new JLabel("New label");
+		JLabel lblBoard = new JLabel("");
 		lblBoard.setBackground(Color.MAGENTA);
 		lblBoard.setBounds(5, 5, 1024*3/4, 823*3/4);
 		setBoardScaledImage(lblBoard);
 		layeredPane.add(lblBoard);
+		
+//		JLabel lblMiss = new JLabel("", SwingConstants.CENTER);
+//		lblMiss.setBounds(280, 285, 67, 67);		
+//		layeredPane.setLayer(lblMiss, 1);		
+//		setMissScaledImage(lblMiss);
+//		layeredPane.add(lblMiss);		
 	}
 
 	
-	public void setBoardScaledImage(JLabel lblBoard){
+	private void setBoardScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
             image = ImageIO.read(Board.class.getResource("/resources/board.jpg"));
@@ -86,6 +101,29 @@ public class Board2 extends JFrame {
         Image img= image.getScaledInstance((int)(512*1.5), (int)(430*1.5),
                 Image.SCALE_SMOOTH);
 
-        lblBoard.setIcon(new ImageIcon(img));
+        lbl.setIcon(new ImageIcon(img));
     }	
+	
+	private void setMissScaledImage(JLabel lbl){
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(Board.class.getResource("/resources/miss.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+       Image img= image.getScaledInstance((int)(79*3/4), (int)(33*3/4),
+                Image.SCALE_SMOOTH);
+
+        lbl.setIcon(new ImageIcon(img));
+    }	
+	private void showMiss()
+	{
+		JLabel lblMiss = new JLabel("", SwingConstants.CENTER);
+		lblMiss.setBounds(280, 285, 67, 67);
+		setMissScaledImage(lblMiss);
+		layeredPane.setLayer(lblMiss, 1);		
+		
+		layeredPane.add(lblMiss);
+	}
 }
