@@ -24,19 +24,23 @@ import java.awt.event.ActionEvent;
 
 public class Board2 extends JFrame {
 
+	private static Board2 window = null;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLayeredPane layeredPane;
 
 	/**
-	 * Launch the application.
+	 * Launch the board in singleton Mode.
 	 */
-	public static void main(String[] args) {
+	public static void startBorad() {
+		if (window != null)
+			return;
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Board2 frame = new Board2();
-					frame.setVisible(true);
+					window = new Board2();
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,9 +49,16 @@ public class Board2 extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Singleton Constructor.
 	 */
-	public Board2() {
+	private Board2() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 803, 719);	
@@ -93,7 +104,7 @@ public class Board2 extends JFrame {
 	private void setBoardScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board2.class.getResource("/resources/board.jpg"));
+            image = ImageIO.read(Board.class.getResource("/resources/board.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +118,7 @@ public class Board2 extends JFrame {
 	private void setMissScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board2.class.getResource("/resources/miss.png"));
+            image = ImageIO.read(Board.class.getResource("/resources/miss.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
