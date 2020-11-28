@@ -104,7 +104,7 @@ public class Board2 extends JFrame {
 	private void setBoardScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board.class.getResource("/resources/board.jpg"));
+            image = ImageIO.read(Board2.class.getResource("/resources/board.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +118,7 @@ public class Board2 extends JFrame {
 	private void setMissScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board.class.getResource("/resources/miss.png"));
+            image = ImageIO.read(Board2.class.getResource("/resources/miss.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
