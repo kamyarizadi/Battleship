@@ -1,7 +1,7 @@
 package battleship.start;
 
 
-import battleship.GUI.Board2;
+import battleship.GUI.Board;
 
 public class starter {
 
@@ -13,7 +13,7 @@ public class starter {
 	
 	public static void startBoard() {
 		
-		Board2.startBorad();
+		Board.startBorad();
 	
 	};
 

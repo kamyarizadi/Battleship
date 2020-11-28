@@ -22,9 +22,9 @@ import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Board2 extends JFrame {
+public class Board extends JFrame {
 
-	private static Board2 window = null;
+	private static Board window = null;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLayeredPane layeredPane;
@@ -39,7 +39,7 @@ public class Board2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					window = new Board2();
+					window = new Board();
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +51,7 @@ public class Board2 extends JFrame {
 	/**
 	 * Singleton Constructor.
 	 */
-	private Board2() {
+	private Board() {
 		initialize();
 	}
 
@@ -104,7 +104,7 @@ public class Board2 extends JFrame {
 	private void setBoardScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board2.class.getResource("/resources/board.jpg"));
+            image = ImageIO.read(Board.class.getResource("/resources/board.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -118,7 +118,7 @@ public class Board2 extends JFrame {
 	private void setMissScaledImage(JLabel lbl){
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board2.class.getResource("/resources/miss.png"));
+            image = ImageIO.read(Board.class.getResource("/resources/miss.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
