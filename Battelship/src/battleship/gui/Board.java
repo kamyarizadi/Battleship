@@ -1,4 +1,4 @@
-package battleship.GUI;
+package battleship.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,33 +19,44 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
+
+import view.IBattleshipBoard;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Board extends JFrame {
+public class Board extends JFrame implements IBattleshipBoard {
 
 	private static Board window = null;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JLayeredPane layeredPane;
+	private JLabel lblMsg;
 
 	/**
-	 * Launch the board in singleton Mode.
+	 * Launch the board in the singleton Mode.
 	 */
-	public static void startBorad() {
+	public static IBattleshipBoard startBoard() {
 		if (window != null)
-			return;
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					window = new Board();
-					window.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+			return window;
+		try {
+			//invoke Waits for the form to be appeared then continue
+			EventQueue.invokeAndWait(new Runnable() {
+				public void run() {
+					try {
+						window = new Board();
+						window.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
+			});
+		}
+		catch(Exception e){
+
+		}		
+
+		return window;
 	}
 
 	/**
@@ -55,13 +66,14 @@ public class Board extends JFrame {
 		initialize();
 	}
 
+ 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 803, 719);	
+		setBounds(100, 100, 803, 749);	
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,7 +103,13 @@ public class Board extends JFrame {
 		lblBoard.setBackground(Color.MAGENTA);
 		lblBoard.setBounds(5, 5, 1024*3/4, 823*3/4);
 		setBoardScaledImage(lblBoard);
-		layeredPane.add(lblBoard);
+		layeredPane.add(lblBoard);		
+		lblMsg = new JLabel("MSG");
+		lblMsg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMsg.setForeground(Color.GREEN);
+		lblMsg.setBackground(Color.BLACK);
+		lblMsg.setBounds(313, 665, 143, 15);
+		layeredPane.add(lblMsg);
 		
 //		JLabel lblMiss = new JLabel("", SwingConstants.CENTER);
 //		lblMiss.setBounds(280, 285, 67, 67);		
@@ -136,5 +154,11 @@ public class Board extends JFrame {
 		layeredPane.setLayer(lblMiss, 1);		
 		
 		layeredPane.add(lblMiss);
+	}
+
+	@Override
+	public void displayMessage(String msg) {
+		// TODO Auto-generated method stub
+		this.lblMsg.setText(msg);
 	}
 }
