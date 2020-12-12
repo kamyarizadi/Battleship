@@ -6,5 +6,17 @@ public interface IBattleshipBoard {
 	 * @param msg: message to be shown on board
 	 */
 	public void displayMessage(String msg);	
+	
+	/**
+	 * Displays Miss at the specified location
+	 * @param location: indicates where Miss has to be displayed
+	 */
+	public void displayMiss(String location);
+
+	/**
+	 * Displays Miss at the specified location
+	 * @param location: indicates where Miss has to be displayed
+	 */
+	public void displayHit(String location);
 
 }

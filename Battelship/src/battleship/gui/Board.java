@@ -1,6 +1,5 @@
 package battleship.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -93,7 +92,7 @@ public class Board extends JFrame implements IBattleshipBoard {
 		JButton btnNewButton = new JButton("Fire!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				showMiss();
+				displayMiss(4, 4);
 			}
 		});
 		btnNewButton.setBounds(401, 633, 55, 23);
@@ -133,10 +132,12 @@ public class Board extends JFrame implements IBattleshipBoard {
         lbl.setIcon(new ImageIcon(img));
     }	
 	
-	private void setMissScaledImage(JLabel lbl){
+	private void setMissScaledImage(JLabel lbl, String picType){
+		String picPath = picType.equals("miss")? "/resources/miss.png":"/resources/ship.png";
+		
         BufferedImage image = null;
         try {
-            image = ImageIO.read(Board.class.getResource("/resources/miss.png"));
+            image = ImageIO.read(Board.class.getResource(picPath));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -146,19 +147,76 @@ public class Board extends JFrame implements IBattleshipBoard {
 
         lbl.setIcon(new ImageIcon(img));
     }	
-	private void showMiss()
+	
+	/**
+	 * Displays Miss at cell [i, j]
+	 * @param i
+	 * @param j
+	 */
+	private void displayMiss(int i, int j)
 	{
 		JLabel lblMiss = new JLabel("", SwingConstants.CENTER);
-		lblMiss.setBounds(280, 285, 67, 67);
-		setMissScaledImage(lblMiss);
-		layeredPane.setLayer(lblMiss, 1);		
+		lblMiss.setBounds(136 + i * 72, 66 + j * 72, 67, 67);
+		setMissScaledImage(lblMiss, "miss");
+		layeredPane.setLayer(lblMiss, 1);				
+		layeredPane.add(lblMiss);		
 		
-		layeredPane.add(lblMiss);
+		
+//		/**
+//		 * x and y are coordinates of cells extracted from the picture
+//		 */
+//		int x[] = {136, 208, 280, 351, 424, 495, 567};
+//		int y[] = {66, 137, 209, 285, 357, 428, 500};
+//		for(int i = 0; i < x.length; ++i)
+//			for (int j = 0; j < y.length; ++j)
+//			{
+//				JLabel lblMiss = new JLabel("", SwingConstants.CENTER);
+//				lblMiss.setBounds(136 + i * 72, 66 + j * 72, 67, 67);
+//				setMissScaledImage(lblMiss);
+//				layeredPane.setLayer(lblMiss, 1);				
+//				layeredPane.add(lblMiss);
+//			}
+
+
 	}
 
+	/**
+	 * Displays Hit at cell [i, j]
+	 * @param i
+	 * @param j
+	 */
+	private void displayHit(int i, int j)
+	{
+		JLabel lblHit = new JLabel("", SwingConstants.CENTER);
+		lblHit.setBounds(136 + i * 72, 66 + j * 72, 67, 67);
+		setMissScaledImage(lblHit, "hit");
+		layeredPane.setLayer(lblHit, 1);				
+		layeredPane.add(lblHit);		
+	}	
+	
 	@Override
 	public void displayMessage(String msg) {
 		// TODO Auto-generated method stub
 		this.lblMsg.setText(msg);
 	}
+
+	@Override
+	public void displayMiss(String location) {		
+		int intLoc = Integer.parseInt(location);
+		
+		int j = intLoc / 10; //The left digit corresponds to rows A to G 
+		int i = intLoc % 10; //The right digit corresponds to columns 0 to 6
+		displayMiss(i, j);
+		
+	}
+
+	@Override
+	public void displayHit(String location) {		
+		int intLoc = Integer.parseInt(location);
+		
+		int j = intLoc / 10; //The left digit corresponds to rows A to G 
+		int i = intLoc % 10; //The right digit corresponds to columns 0 to 6
+		displayHit(i, j);
+		
+	}	
 }

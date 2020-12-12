@@ -1,7 +1,5 @@
 package view;
 
-import battleship.gui.Board;
-
 public class View {
 	private static View view = null;
 	private IBattleshipBoard board;
@@ -22,11 +20,28 @@ public class View {
 		return view;
 	}
 	/**
-	 * sends game massages to the board to be shown on game's GUI
+	 * sends massages to the board to be shown on game's GUI
 	 * @param msg: message to be shown on game's board
 	 */
 	public void displayMessage(String msg) {
 		board.displayMessage(msg);
 	}
+	
+	/**
+	 * send display miss message to the board to display miss icon at the cell specified by the location parameter
+	 * @param location
+	 */
+	public void displayMiss(String location) {
+		board.displayMiss(location);
+	}
+	
+	/**
+	 * send display hit message to the board to display battle icon at the cell specified by the location parameter
+	 * @param location
+	 */
+
+	public void displayHit(String location) {
+		board.displayHit(location);
+	}	
 
 }

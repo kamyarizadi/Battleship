@@ -7,6 +7,10 @@ import view.View;
 
 public class Starter {
 
+	protected static IBattleshipBoard board = null;
+	protected static View view;
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Main App");
@@ -15,10 +19,8 @@ public class Starter {
 
 	
 	public static void startGame() {
-		
-		IBattleshipBoard board =  Board.startBoard();
-		View view = View.createView(board);		
-		view.displayMessage("Testing ...");			
+		board = Board.startBoard();
+		view = View.createView(board);						
 	};
 
 	
