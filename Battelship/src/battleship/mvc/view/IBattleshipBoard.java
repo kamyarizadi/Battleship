@@ -1,4 +1,4 @@
-package view;
+package battleship.mvc.view;
 
 public interface IBattleshipBoard {
 	/**

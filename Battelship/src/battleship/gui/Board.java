@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
-import view.IBattleshipBoard;
+import battleship.mvc.view.IBattleshipBoard;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

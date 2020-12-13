@@ -1,4 +1,4 @@
-package view;
+package battleship.mvc.view;
 
 public class View {
 	private static View view = null;

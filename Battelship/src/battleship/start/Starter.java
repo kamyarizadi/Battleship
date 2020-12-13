@@ -2,13 +2,15 @@ package battleship.start;
 
 
 import battleship.gui.Board;
-import view.IBattleshipBoard;
-import view.View;
+import battleship.mvc.model.Model;
+import battleship.mvc.view.IBattleshipBoard;
+import battleship.mvc.view.View;
 
 public class Starter {
 
 	protected static IBattleshipBoard board = null;
 	protected static View view;
+	protected static Model model; 
 
 
 	public static void main(String[] args) {
@@ -20,7 +22,8 @@ public class Starter {
 	
 	public static void startGame() {
 		board = Board.startBoard();
-		view = View.createView(board);						
+		view = View.createView(board);	
+		model = Model.createModel(view);
 	};
 
 	
