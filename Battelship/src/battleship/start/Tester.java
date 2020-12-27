@@ -24,7 +24,7 @@ public class Tester extends Starter{
 
 		/**
 		 * Test of model
-		 */
+		 */ 
 //		model.fire("53");
 //		
 //		model.fire("06");
