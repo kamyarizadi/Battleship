@@ -67,7 +67,7 @@ public class Controller {
 		System.out.println(controller.parseGuess("H0"));
 		System.out.println(controller.parseGuess("A7"));
 		//The following test is besides above advised in the book
-		System.out.println(controller.parseGuess("AA"));		
+		System.out.println(controller.parseGuess("AA")); 		
 		
 	}
 	
