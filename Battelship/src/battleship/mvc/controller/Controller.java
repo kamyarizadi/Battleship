@@ -3,11 +3,13 @@ package battleship.mvc.controller;
 import javax.swing.JOptionPane;
 
 import battleship.mvc.model.Model;
+import battleship.mvc.view.View;
 
 public class Controller {
 	private static Controller controller = null;
 	
 	private Model model;
+	private View view;
 	
 	private int guesses = 0;
 
@@ -15,19 +17,29 @@ public class Controller {
 	/**
 	 * Controller is created as singleton pattern
 	 */
-	private Controller(Model model) {
+	private Controller(Model model, View view) {
 		this.model = model;
+		this.view = view;
 	}
 	
-	public static Controller createController(Model model) {
+	public static Controller createController(Model model, View view) {
 		if(controller != null) {
 			return controller;			
 		}
-		controller = new Controller(model);
+		controller = new Controller(model, view);
 		return controller;			
 	}
 	
 	public void processGuess(String guess) {
+		String location = parseGuess(guess);
+		if(location != null) {
+			this.guesses++;
+			boolean hit = model.fire(location);
+			if (hit && model.getShipsSunk() == model.getNumShips()) {
+				view.displayMessage("You sank all my battleships, in " +
+				this.guesses + " guesses");
+			}
+		}
 	}
 
 	private String parseGuess(String guess) {
@@ -58,9 +70,9 @@ public class Controller {
 	
 	/**
 	 * This method is designed only to test the parseGuess method 
-	 * since this method is private and could not be tested out of the class scope
+	 * since parseGuess method is private and could not be tested out of the class scope
 	 */	
-	public static void TestParseGuess() {
+	public void TestParseGuess() {
 		System.out.println(controller.parseGuess("A0"));
 		System.out.println(controller.parseGuess("B6"));
 		System.out.println(controller.parseGuess("G3"));

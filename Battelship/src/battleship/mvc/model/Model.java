@@ -37,6 +37,15 @@ public class Model {
 	public int getBoardSize() {
 		return this.boardSize; 
 	}
+
+	public int getNumShips() {
+		return numShips;
+	}
+	
+	public int getShipsSunk() {
+		return shipsSunk;
+	}
+	
 	
 	/**
 	 * This methods accept a guess and verifies if it hits a ship or not

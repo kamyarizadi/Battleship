@@ -26,7 +26,7 @@ public class Starter {
 		board = Board.startBoard();
 		view = View.createView(board);	
 		model = Model.createModel(view);
-		controller = Controller.createController(model);
+		controller = Controller.createController(model, view);
 	};
 
 	
