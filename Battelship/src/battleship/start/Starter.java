@@ -22,11 +22,13 @@ public class Starter {
 	}
 
 	
+	
 	public static void startGame() {
 		board = Board.startBoard();
 		view = View.createView(board);	
 		model = Model.createModel(view);
 		controller = Controller.createController(model, view);
+		board.setController(controller);
 	};
 
 	

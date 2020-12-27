@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import javax.swing.border.LineBorder;
 
+import battleship.mvc.controller.Controller;
 import battleship.mvc.view.IBattleshipBoard;
 
 import java.awt.event.ActionListener;
@@ -27,8 +28,9 @@ import java.awt.event.ActionEvent;
 public class Board extends JFrame implements IBattleshipBoard {
 
 	private static Board window = null;
+	private Controller controller = null;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtGuessInput;
 	private JLayeredPane layeredPane;
 	private JLabel lblMsg;
 
@@ -62,10 +64,15 @@ public class Board extends JFrame implements IBattleshipBoard {
 	 * Singleton Constructor.
 	 */
 	private Board() {
-		initialize();
+		initialize();		
 	}
 
  
+	public void setController(Controller controller) {
+		this.controller = controller;
+	}
+	
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -84,18 +91,23 @@ public class Board extends JFrame implements IBattleshipBoard {
 		layeredPane.setBackground(Color.BLACK);
 		contentPane.add(layeredPane);
 		
-		textField = new JTextField();
-		textField.setBounds(313, 634, 86, 20);
-		layeredPane.add(textField);
-		textField.setColumns(10);
+		txtGuessInput = new JTextField();
+		txtGuessInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				handleFireButton();
+			}
+		});
+		txtGuessInput.setBounds(313, 634, 86, 20);
+		layeredPane.add(txtGuessInput);
+		txtGuessInput.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Fire!");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				displayMiss(4, 4);
+				handleFireButton();
 			}
 		});
-		btnNewButton.setBounds(401, 633, 55, 23);
+		btnNewButton.setBounds(401, 633, 66, 23);
 		layeredPane.add(btnNewButton);
 		
 		JLabel lblBoard = new JLabel("");
@@ -147,6 +159,16 @@ public class Board extends JFrame implements IBattleshipBoard {
 
         lbl.setIcon(new ImageIcon(img));
     }	
+	
+	
+	private void handleFireButton() {
+		String guess = txtGuessInput.getText();
+		controller.processGuess(guess);
+		txtGuessInput.setText("");
+		
+		
+	}
+	
 	
 	/**
 	 * Displays Miss at cell [i, j]
