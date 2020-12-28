@@ -115,7 +115,7 @@ public class Board extends JFrame implements IBattleshipBoard {
 		lblBoard.setBounds(5, 5, 1024*3/4, 823*3/4);
 		setBoardScaledImage(lblBoard);
 		layeredPane.add(lblBoard);		
-		lblMsg = new JLabel("MSG");
+		lblMsg = new JLabel("");
 		lblMsg.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMsg.setForeground(Color.GREEN);
 		lblMsg.setBackground(Color.BLACK);

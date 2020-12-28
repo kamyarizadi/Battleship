@@ -1,5 +1,7 @@
 package battleship.mvc.model;
 
+import java.util.Random;
+
 import battleship.mvc.view.View;
 
 public class Model {
@@ -20,9 +22,20 @@ public class Model {
 		
 		ships = new Ship[numShips];
 		
-		ships[0] = new Ship("06", "16", "26");
-		ships[1] = new Ship("24", "34", "44");
-		ships[2] = new Ship("10", "11", "12");				
+//		ships[0] = new Ship("06", "16", "26");
+//		ships[1] = new Ship("24", "34", "44");
+//		ships[2] = new Ship("10", "11", "12");
+		
+		/**
+		 * ships are created with no location 
+		 * locations are created by calling generateShipLocations
+		 */
+		ships[0] = new Ship("", "", "");
+		ships[1] = new Ship("", "", "");
+		ships[2] = new Ship("", "", "");
+		
+		
+		this.generateShipLocations();
 	}
 	
 	
@@ -44,6 +57,55 @@ public class Model {
 	
 	public int getShipsSunk() {
 		return shipsSunk;
+	}
+	
+	
+	private void generateShipLocations() {
+		String[] locations;
+		for (var i = 0; i < this.numShips; i++) {
+			do {
+				locations = this.generateShip();
+				} while (this.collision(locations));
+			this.ships[i].locations = locations;
+		}
+	}
+	
+	private String[] generateShip() {
+		Random random = new Random();
+		int direction = random.nextInt(2);
+		
+		int row, col;
+		if(direction == 1) {
+			row = random.nextInt(this.boardSize);
+			col = random.nextInt(this.boardSize - 3);
+		} else {
+			row = random.nextInt(this.boardSize - 3);
+			col = random.nextInt(this.boardSize);			
+		}
+		
+		String[] newLocations = new String[this.shipLength];
+		for(int i = 0; i <this.shipLength; ++i) {
+			if(direction == 1) {
+				newLocations[i] = String.valueOf(new char[] {Character.forDigit(row, 10), Character.forDigit(col + i, 10)});
+			} else {
+				newLocations[i] = String.valueOf(new char[] {Character.forDigit(row + i, 10), Character.forDigit(col, 10)});
+			}
+			
+		}
+		
+		return newLocations;
+	}
+	
+	private boolean collision(String[] locations) {
+		for (int i = 0; i < this.numShips; i++) {
+			Ship ship = this.ships[i];
+			for(int j = 0; j < locations.length; ++j) {
+				if(indexOf(ship, locations[j]) >= 0) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	
@@ -75,6 +137,13 @@ public class Model {
 		return false;
 	}
 	
+	/**
+	 * returns the index of location indicates by parameter guess
+	 * if guess is one of locations occupied by ship 
+	 * @param ship
+	 * @param guess: location which we want to test if it is on the ship or not
+	 * @return position of ship which guess is located on it
+	 */
 	private int indexOf(Ship ship, String guess) {
 		for(int i = 0; i < this.shipLength; ++i) {
 			if(ship.locations[i].equals(guess))

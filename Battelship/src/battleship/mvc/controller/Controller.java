@@ -12,6 +12,8 @@ public class Controller {
 	private View view;
 	
 	private int guesses = 0;
+	
+	private boolean gameIsOver = false; //This property is added to have better control over the game status
 
 	
 	/**
@@ -30,12 +32,17 @@ public class Controller {
 		return controller;			
 	}
 	
+	public boolean isGameOver() {
+		return this.gameIsOver;
+	}
+	
 	public void processGuess(String guess) {
 		String location = parseGuess(guess);
 		if(location != null) {
 			this.guesses++;
 			boolean hit = model.fire(location);
 			if (hit && model.getShipsSunk() == model.getNumShips()) {
+				this.gameIsOver = true;
 				view.displayMessage("You sank all my battleships, in " +
 				this.guesses + " guesses");
 			}

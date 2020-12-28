@@ -48,16 +48,30 @@ public class Tester extends Starter{
 		/**
 		 * Test of processGuess in the controller
 		 */
-		controller.processGuess("A0");
-		controller.processGuess("A6");
-		controller.processGuess("B6");
-		controller.processGuess("C6");
-		controller.processGuess("C4");
-		controller.processGuess("D4");
-		controller.processGuess("E4");
-		controller.processGuess("B0");
-		controller.processGuess("B1");
-		controller.processGuess("B2");
+//		controller.processGuess("A0");
+//		controller.processGuess("A6");
+//		controller.processGuess("B6");
+//		controller.processGuess("C6");
+//		controller.processGuess("C4");
+//		controller.processGuess("D4");
+//		controller.processGuess("E4");
+//		controller.processGuess("B0");
+//		controller.processGuess("B1");
+//		controller.processGuess("B2");
+		
+		/**
+		 * A complete guess starting from the first row to the end
+		 */
+		char[] alphabet = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
+		outer: for(int i = 0; i < alphabet.length; ++i)
+		{
+			inner: for (int j = 0; j < model.getBoardSize(); j++) {
+				String location = String.valueOf(new char[] {alphabet[i], Character.forDigit(j, 10)});
+				controller.processGuess(location);
+				
+				if(controller.isGameOver()) break outer; 
+			}
+		}
 	}
 
 	
