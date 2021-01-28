@@ -33,6 +33,7 @@ public class Board extends JFrame implements IBattleshipBoard {
 	private JTextField txtGuessInput;
 	private JLayeredPane layeredPane;
 	private JLabel lblMsg;
+	private JButton btnFireButton;
 
 	/**
 	 * Launch the board in the singleton Mode.
@@ -101,14 +102,14 @@ public class Board extends JFrame implements IBattleshipBoard {
 		layeredPane.add(txtGuessInput);
 		txtGuessInput.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Fire!");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnFireButton = new JButton("Fire!");
+		btnFireButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				handleFireButton();
 			}
 		});
-		btnNewButton.setBounds(401, 633, 66, 23);
-		layeredPane.add(btnNewButton);
+		btnFireButton.setBounds(401, 633, 66, 23);
+		layeredPane.add(btnFireButton);
 		
 		JLabel lblBoard = new JLabel("");
 		lblBoard.setBackground(Color.MAGENTA);
@@ -240,5 +241,14 @@ public class Board extends JFrame implements IBattleshipBoard {
 		int i = intLoc % 10; //The right digit corresponds to columns 0 to 6
 		displayHit(i, j);
 		
+	}
+
+	@Override
+	public void disableGuess() {
+		this.btnFireButton.setEnabled(false);
+		this.txtGuessInput.setEnabled(false);
+		
 	}	
+	
+	
 }

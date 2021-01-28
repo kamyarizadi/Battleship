@@ -24,5 +24,7 @@ public interface IBattleshipBoard {
 	
 	
 	public void setController(Controller controller);
+	
+	public void disableGuess();
 
 }

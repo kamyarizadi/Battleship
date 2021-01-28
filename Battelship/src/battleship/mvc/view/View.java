@@ -43,5 +43,13 @@ public class View {
 	public void displayHit(String location) {
 		board.displayHit(location);
 	}	
+	
+	
+	/**
+	 * send disable message to the board to prevent more guess after game is get  over
+	 */
+	public void disableGuess() {
+		board.disableGuess();
+	}
 
 }
