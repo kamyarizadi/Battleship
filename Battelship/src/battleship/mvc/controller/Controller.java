@@ -37,6 +37,11 @@ public class Controller {
 	}
 	
 	public void processGuess(String guess) {
+		if(this.gameIsOver) {
+			JOptionPane.showMessageDialog(null, "Game is over!");
+			return;
+		}
+		
 		String location = parseGuess(guess);
 		if(location != null) {
 			this.guesses++;
@@ -45,6 +50,7 @@ public class Controller {
 				this.gameIsOver = true;
 				view.displayMessage("You sank all my battleships, in " +
 				this.guesses + " guesses");
+				JOptionPane.showMessageDialog(null, "Game is over!");
 			}
 		}
 	}
